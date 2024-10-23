@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:35:44 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/10/23 18:27:55 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:42:27 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,6 @@ static char	*free_and_return_null(char *buffer, char *str)
 	free(buffer);
 	free(str);
 	return (NULL);
-}
-
-static char	*read_fd_to_str_bybit(int fd)
-{
-	char	*buffer;
-	char	*str;
-	char	ch;
-	ssize_t	bytes;
-
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	str = (char *)malloc(1);
-	if (!str || !buffer)
-		return (free_and_return_null(buffer, str));
-	str[0] = '\0';
-	bytes = 1;
-	while (bytes > 0)
-	{
-		bytes = read(fd, buffer, 1);
-		if (bytes == -1)
-			return (free_and_return_null(buffer, str));
-		if (bytes != 0)
-		{
-			buffer[bytes] = '\0';
-			ch = buffer[0];
-			str = ft_strjoin(str, buffer);
-			if (!str)
-				return (free_and_return_null(buffer, str));
-			if (ch == '\n')
-				bytes = 0;
-		}
-	}
-	if (ft_strlen(str) == 0)
-		return (free_and_return_null(buffer, str));
-	free(buffer);
-	return (str);
 }
 
 static char	*read_fd_to_str(int fd, char *str)
@@ -139,19 +104,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (BUFFER_SIZE == -1)
-	{
-		line = read_fd_to_str_bybit(fd);
-		if (!line)
-			return (NULL);
-	}
-	else
-	{
-		str[fd] = read_fd_to_str(fd, str[fd]);
-		if (!str[fd])
-			return (NULL);
-		line = get_one_line(str[fd]);
-		str[fd] = start_next_line(str[fd]);
-	}
+	str[fd] = read_fd_to_str(fd, str[fd]);
+	if (!str[fd])
+		return (NULL);
+	line = get_one_line(str[fd]);
+	str[fd] = start_next_line(str[fd]);
 	return (line);
 }
