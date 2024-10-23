@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:36:08 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/10/22 00:24:16 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:47:03 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 16
+#  define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);
