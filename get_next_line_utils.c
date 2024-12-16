@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:36:29 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/10/23 18:21:42 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:31:53 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strchr(const char *str, int c)
 	return ((char *) NULL);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*ptr;
 	int		i;
@@ -54,14 +54,10 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	j = 0;
 	i = 0;
-	if (s1)
-	{
-		while (s1[i] != '\0')
-			ptr[j++] = s1[i++];
-		free(s1);
-	}
+	while (s1 && s1[i] != '\0')
+		ptr[j++] = s1[i++];
 	i = 0;
-	while (s2[i] != '\0')
+	while (s2 && s2[i] != '\0')
 		ptr[j++] = s2[i++];
 	ptr[j] = '\0';
 	return (ptr);

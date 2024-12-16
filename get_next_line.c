@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:35:44 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/10/23 19:05:13 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:24:53 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static char	*read_fd_to_str(int fd, char *str)
 		tmp = ft_strjoin(str, buffer);
 		if (!tmp)
 			return (free_and_return_null(buffer, str));
+		free(str);
 		str = tmp;
 	}
 	free(buffer);
